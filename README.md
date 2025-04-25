@@ -1,1 +1,2 @@
-# StudyNotion-EdTech-MERN-App
+# StudyNotion
+ This is an EdTech Platform
