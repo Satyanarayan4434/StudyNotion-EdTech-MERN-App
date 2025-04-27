@@ -10,7 +10,7 @@ import { PiNetworkFill } from "react-icons/pi";
 
 export default function HeroSection() {
   return (
-    <div className="w-full flex flex-col gap-[5rem] items-center justify-center relative bg-richblack-900">
+    <div className="w-full flex flex-col gap-[5rem] items-center justify-center relative bg-richblack-900 pt-24">
       {/* Section-1 */}
       <div className="w-[913px] flex flex-col gap-[38px] items-center justify-center">
         <Link

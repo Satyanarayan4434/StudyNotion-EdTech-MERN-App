@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import Catalog from '../components/Catalog/Catalog';
 import TimeLineSection from '../components/TimeLine/TimeLineSection';
 import InstructorWelcomeSection from '../components/InstructorWelcomeSection/InstructorWelcomeSection';
+import Reviews from '../components/Reviews/Reviews';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Catalog/>
         <TimeLineSection/>
         <InstructorWelcomeSection/>
+        <Reviews/>
         <Footer/>
     </div>
   )

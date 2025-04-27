@@ -8,7 +8,7 @@ import { FooterLink2 } from "../../data/footer-links";
 
 export default function Footer() {
   return (
-    <div className="border-t-[1px] border-richblack-50 mt-[120px] bg-richblack-800  px-[72px] flex flex-col gap-[3rem]">
+    <div className="border-t-[1px] border-richblack-50  bg-richblack-800  px-[72px] flex flex-col gap-[3rem]">
     {/* Upper section */}
       <div className="text-richblack-50 flex text-sm pt-[70px]  items-start justify-between ">
         {/* Company */}
