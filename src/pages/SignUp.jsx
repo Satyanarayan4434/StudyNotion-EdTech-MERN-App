@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import countrycode from "../data/countrycode.json";
 import signUpImage from "../assets/Images/signup.webp";
 import frame from "../assets/Images/frame.png";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +32,6 @@ export default function SignUp() {
 
   const handleCountryCodeChange = (event) => {
     setCountryCode(event.target.value);
-    
   };
 
   const handleButtonActive = (userType) => {
@@ -74,7 +75,7 @@ export default function SignUp() {
       password: "",
       confirmPassword: "",
     });
-    setCountryCode("+91")
+    setCountryCode("+91");
   };
 
   useEffect(() => {
@@ -206,7 +207,7 @@ export default function SignUp() {
 
               {/* password and confirm */}
               <div className="flex items-center w-[30rem] justify-between">
-                <div className="flex flex-col gap-2 items-start">
+                <div className="flex flex-col gap-2 items-start relative">
                   <label htmlFor="password">
                     Password : <span className="text-pink-300">*</span>
                   </label>
@@ -216,11 +217,24 @@ export default function SignUp() {
                     name="password"
                     value={data.password}
                     onChange={handleChange}
-                    onClick={() => setShowPassword(!showPassword)}
                     className="border-none text-richblack-50 bg-richblack-800 py-2 px-2 rounded-xl"
                   />
+                  <div
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute bottom-3 right-6"
+                  >
+                    {showPassword ? (
+                      <div>
+                        <FaEye />
+                      </div>
+                    ) : (
+                      <div>
+                        <FaEyeSlash />
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="flex flex-col gap-2 items-start">
+                <div className="flex flex-col gap-2 items-start relative">
                   <label htmlFor="cnfPassword">
                     Confirm Password : <span className="text-pink-300">*</span>
                   </label>
@@ -230,9 +244,22 @@ export default function SignUp() {
                     name="confirmPassword"
                     value={data.confirmPassword}
                     onChange={handleChange}
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="border-none text-richblack-50 bg-richblack-800 py-2 px-2 rounded-xl"
                   />
+                  <div
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute bottom-3 right-6"
+                  >
+                    {showConfirmPassword ? (
+                      <div>
+                        <FaEye />
+                      </div>
+                    ) : (
+                      <div>
+                        <FaEyeSlash />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
