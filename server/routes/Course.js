@@ -40,7 +40,7 @@ router.put("/updateSection", auth, isInstructor, updateSection);
 router.delete("/deleteSection", auth, isInstructor, deleteSection);
 
 //************************************************************************************** *//
-//                                  Define Routes For Sub-ion                            //
+//                                  Define Routes For Sub-section                            //
 //************************************************************************************* //
 router.post("/addSubSection", auth, isInstructor, createSubSection);
 router.put("/updateSubSection", auth, isInstructor, updateSubSection);

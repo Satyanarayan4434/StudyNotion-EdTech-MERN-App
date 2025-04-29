@@ -15,11 +15,11 @@ const {auth} = require("../middlewares/auth");
 //***************************************************************************** *//
 //                                  Profile Routes                              *//
 //***************************************************************************** *//
-router.put("/updateProfile", auth, updateProfile);
-router.delete("/deleteAccount", auth, deleteAccount);
-router.get("/getUserDetails", auth, getAllUserDetails);
-router.put("/updateDisplayPicture", auth, updateDisplayPicture);
-router.get("/getEnrolledCourses", auth, getEnrolledCourses);
+router.put("/updateprofile", auth, updateProfile);
+router.delete("/deleteaccount", auth, deleteAccount);
+router.get("/getUserdetails", auth, getAllUserDetails);
+router.put("/updatedisplayPicture", auth, updateDisplayPicture);
+router.get("/getenrolledcourses", auth, getEnrolledCourses);
 
 //Exporting the router for use in main application
 module.exports = router;

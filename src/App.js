@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import { Navbar } from "./components/Navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/signUp" element={<SignUp/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
      </Routes>
+     <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

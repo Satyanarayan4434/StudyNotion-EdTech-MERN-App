@@ -4,10 +4,18 @@ import signUpImage from "../assets/Images/signup.webp";
 import frame from "../assets/Images/frame.png";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSignUpData } from "../slices/slice/authSlice";
+import { sendOtp } from "../services/operations/authApi";
+
 
 export default function SignUp() {
+  //Password On off
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  //Data Holder
   const [data, setData] = useState({
     accountType: "Student",
     fname: "",
@@ -21,6 +29,10 @@ export default function SignUp() {
   const [userType, setUserType] = useState("Student");
   const [selectedCountryCode, setCountryCode] = useState("+91");
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //Input Handle Change Handler
   const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(value);
@@ -30,10 +42,12 @@ export default function SignUp() {
     }));
   };
 
+  //Country Code Handler
   const handleCountryCodeChange = (event) => {
     setCountryCode(event.target.value);
   };
 
+  // User Type Declaration
   const handleButtonActive = (userType) => {
     setUserType(userType);
     setData((prevData) => ({
@@ -42,9 +56,12 @@ export default function SignUp() {
     }));
   };
 
+  // Submit Handler
   const handleSubmit = (event) => {
     event.preventDefault();
     const fullPhoneNumber = `${selectedCountryCode}${data.number}`;
+
+    //Data Validation
     if (
       !data.fname ||
       !data.lname ||
@@ -56,16 +73,23 @@ export default function SignUp() {
       alert("Fill all the details correctly");
       return;
     }
+
+    //Password Matching
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
 
+    //Final Data after phone number combination with country code
     const finalData = {
       ...data,
       number: fullPhoneNumber,
     };
     setSubmitedData(finalData);
+
+    //Dispatch Data to Redux
+    dispatch(setSignUpData(data));
+    dispatch(sendOtp(data.email, navigate));
 
     setData({
       fname: "",
@@ -78,6 +102,7 @@ export default function SignUp() {
     setCountryCode("+91");
   };
 
+  //Console Data
   useEffect(() => {
     if (submitedData) {
       console.log(submitedData);
@@ -284,6 +309,7 @@ export default function SignUp() {
           <img src={frame} alt="Frame" />
         </div>
       </div>
+      
     </div>
   );
 }
