@@ -193,7 +193,6 @@ export default function SignUp() {
                   value={data.email}
                   onChange={handleChange}
                   className="border-none w-[30rem] text-richblack-50 bg-richblack-800 py-2 px-2 rounded-xl"
-                  lassName=""
                 />
               </div>
 

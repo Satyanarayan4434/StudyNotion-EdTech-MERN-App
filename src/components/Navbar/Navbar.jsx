@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { NavbarLinks } from "../../data/navbar-links";
 import Logo from "../../assets/Logo/Logo-Full-Light.png";
 import { Link } from "react-router-dom";
 import { MdArrowDropDown } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
-import { apiConnector } from "../../services/apiconnector";
-import { categories } from "../../services/apis";
+// import { apiConnector } from "../../services/apiconnector";
+// import { categories } from "../../services/apis";
 
 export const Navbar = () => {
   const subLinks = [
@@ -14,19 +14,22 @@ export const Navbar = () => {
     { course: "Web Development", path: "/web development" },
   ];
 
-  const [catLinks, setCatLinks] = useState([]);
-  const fetchAllCategories = async () => {
-    try {
-      const result = await apiConnector("GET", categories.CATEGORIES_API);
-      console.log(result);
-      setCatLinks(result.data);
-    } catch (error) {
-      console.log("Error While fetching data of categories");
-    }
-  };
-  useEffect(() => {
-    fetchAllCategories();
-  }, []);
+
+  // const [catLinks, setCatLinks] = useState([]);
+
+  // const fetchAllCategories = async () => {
+  //   try {
+  //     const result = await apiConnector("GET", categories.CATEGORIES_API);
+  //     console.log(result);
+  //     setCatLinks(result.data);
+  //   } catch (error) {
+  //     console.log("Error While fetching data of categories");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchAllCategories();
+  // }, []);
 
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
@@ -81,7 +84,7 @@ export const Navbar = () => {
           </div>
         ) : (
           <div>
-            <div>
+            {/* <div>
               {user.accountType !== "Instructor" && "Admin" ? (
                 <div>
                   <FaCartShopping />
@@ -95,7 +98,7 @@ export const Navbar = () => {
               <Link to="/profile">
                 <img src={user.image} alt="" />
               </Link>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
