@@ -18,10 +18,10 @@ export default function SignUp() {
   //Data Holder
   const [data, setData] = useState({
     accountType: "Student",
-    fname: "",
-    lname: "",
+    firstName: "",
+    lastName: "",
     email: "",
-    number: "",
+    contactNumber: "",
     password: "",
     confirmPassword: "",
   });
@@ -63,8 +63,8 @@ export default function SignUp() {
 
     //Data Validation
     if (
-      !data.fname ||
-      !data.lname ||
+      !data.firstName ||
+      !data.lastName ||
       !data.email ||
       !data.number ||
       !data.password ||
@@ -83,23 +83,26 @@ export default function SignUp() {
     //Final Data after phone number combination with country code
     const finalData = {
       ...data,
-      number: fullPhoneNumber,
+      contactNumber: fullPhoneNumber,
     };
     setSubmitedData(finalData);
 
     //Dispatch Data to Redux
     dispatch(setSignUpData(data));
-    dispatch(sendOtp(data.email, navigate));
+    const {email} = data;
+    console.log(email)
+    dispatch(sendOtp({email, navigate}));
 
     setData({
-      fname: "",
-      lname: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      number: "",
+      contactNumber: "",
       password: "",
       confirmPassword: "",
     });
     setCountryCode("+91");
+    navigate("")
   };
 
   //Console Data
@@ -151,30 +154,30 @@ export default function SignUp() {
               onSubmit={handleSubmit}
               className="flex flex-col gap-3 items-center"
             >
-              {/* Fname and Lname */}
+              {/* firstName and lastName */}
               <div className="flex items-center justify-between w-[30rem] gap-14">
                 <div className="flex flex-col gap-2 items-start">
-                  <label htmlFor="fname">
+                  <label htmlFor="firstName">
                     First Name : <span className="text-pink-300">*</span>
                   </label>
                   <input
                     type="text"
-                    name="fname"
-                    id="fname"
-                    value={data.fname}
+                    name="firstName"
+                    id="firstName"
+                    value={data.firstName}
                     onChange={handleChange}
                     className="border-none text-richblack-50 bg-richblack-800 py-2 px-2 rounded-xl"
                   />
                 </div>
                 <div className="flex flex-col  gap-2 items-start">
-                  <label htmlFor="lname">
+                  <label htmlFor="lastName">
                     Last Name : <span className="text-pink-300">*</span>
                   </label>
                   <input
                     type="text"
-                    name="lname"
-                    id="lname"
-                    value={data.lname}
+                    name="lastName"
+                    id="lastName"
+                    value={data.lastName}
                     onChange={handleChange}
                     className="border-none text-richblack-50 bg-richblack-800 py-2 px-2 rounded-xl"
                   />

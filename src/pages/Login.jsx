@@ -6,6 +6,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/operations/authApi";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -84,6 +85,7 @@ export default function Login() {
               </div>
 
               {/* password and confirm */}
+              <div className="flex flex-col items-end gap-1 ">
               <div className="flex flex-col gap-2 items-start relative">
                 <label htmlFor="password">
                   Password : <span className="text-pink-300">*</span>
@@ -111,7 +113,8 @@ export default function Login() {
                   )}
                 </div>
               </div>
-
+              <Link to="/forGotPassword">Forget-Password ?</Link>
+              </div>
               {/* Submit Button */}
               <button
                 className=" items-center w-[30rem] py-2 rounded-xl bg-yellow-50 text-richblack-800"

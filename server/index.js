@@ -52,7 +52,7 @@ app.use(
 cloudinaryConnect();
 
 // Define routes
-app.use("/api/v1/auth", userRoutes); // Fixed variable name if corrected
+app.use("/api/v1/auth", userRoutes); 
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/course", courseRoutes);

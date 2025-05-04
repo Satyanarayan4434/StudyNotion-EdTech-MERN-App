@@ -3,6 +3,7 @@ import { resetPasswordEndpoints } from "../apis";
 import { apiConnector } from "../apiconnector";
 import toast from "react-hot-toast";
 import { setLoading, setToken } from "../../slices/slice/authSlice";
+import { setProfile } from "../../slices/slice/profileSlice";
 
 const { SENDOTP_API, SIGNUP_API, LOGIN_API, CHANGEPASSWORD_API } =
   authEndpoints;
@@ -40,12 +41,13 @@ export const signUp = ({
   accountType,
   contactNumber,
   otp,
+  navigate,
 }) => {
   return async (dispatch) => {
-    const toastId = await toast.loading("Loading..");
+    const toastId = toast.loading("Loading..");
     dispatch(setLoading(true));
     try {
-      const signUp = apiConnector("POST", SIGNUP_API, {
+      const signUp = await apiConnector("POST", SIGNUP_API, {
         firstName,
         lastName,
         email,
@@ -60,18 +62,20 @@ export const signUp = ({
         throw new Error(signUp.data.message);
       }
       toast.success("Registration Successfull");
+      navigate("/login");
     } catch (error) {
-      toast.error("Error while Registration ->", error);
+      console.log(error.message);
+      toast.error("Error while Registration");
     }
     toast.dismiss(toastId);
     dispatch(setLoading(false));
   };
 };
 
-export const login = ({  email, password, navigate }) => {
+export const login = ({ email, password, navigate }) => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
     const toastID = toast.loading("Loading..");
+    dispatch(setLoading(true));
     try {
       const loginResponse = await apiConnector("POST", LOGIN_API, {
         email,
@@ -83,7 +87,18 @@ export const login = ({  email, password, navigate }) => {
       }
       toast.success("Login Success");
       dispatch(setToken(loginResponse.data.token));
-      navigate("/")
+
+      const userImage = loginResponse.data?.user?.image
+        ? loginResponse.data.user.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${loginResponse.data.user.firstName} ${loginResponse.data.user.lastName}`;
+
+      const userPayload = { ...loginResponse.data.user, image: userImage };
+      dispatch(setProfile(userPayload));
+
+      localStorage.setItem("token", JSON.stringify(loginResponse.data.token));
+      localStorage.setItem("user", JSON.stringify(userPayload));
+
+      navigate("/");
     } catch (error) {
       console.log("Error While connecting with Login API");
       toast.error("Error While Login");
@@ -93,25 +108,45 @@ export const login = ({  email, password, navigate }) => {
   };
 };
 
-export const changePassword = ({ oldPassword, newPassword, confirmPassword}) => {
-  //Page is not created to call this function yet
-return async(dispatch) =>{
-  const toastId = toast.loading("Loading..");
-  dispatch(setLoading(true));
-  try {
-    const changePassword = await apiConnector("POST", CHANGEPASSWORD_API, {oldPassword, newPassword, confirmPassword});
-    if(!changePassword.data.success){
-      throw new Error(changePassword.data.message);
-    }
-    toast.success("Password Changed Successfully");
+export function logout(navigate) {
+  return (dispatch) => {
+    dispatch(setToken(null));
+    dispatch(setProfile(null));
 
-  } catch (error) {
-    console.log("Error While Changing Password ->", error);
-    toast.error("Error While Changing Password")
-  }
-  dispatch(setLoading(false))
-  toast.dismiss(toastId)
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    toast.success("Logged Out");
+    navigate("/");
+  };
 }
+
+export const changePassword = ({
+  oldPassword,
+  newPassword,
+  confirmPassword,
+}) => {
+  //Page is not created to call this function yet
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading..");
+    dispatch(setLoading(true));
+    try {
+      const changePassword = await apiConnector("POST", CHANGEPASSWORD_API, {
+        oldPassword,
+        newPassword,
+        confirmPassword,
+      });
+      if (!changePassword.data.success) {
+        throw new Error(changePassword.data.message);
+      }
+      toast.success("Password Changed Successfully");
+    } catch (error) {
+      console.log("Error While Changing Password ->", error);
+      toast.error("Error While Changing Password");
+    }
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
+  };
 };
 
 export const sendResetPasswordToken = ({ email }) => {
@@ -127,33 +162,44 @@ export const sendResetPasswordToken = ({ email }) => {
       if (!sendResetPasswordToken.data.success) {
         throw new Error(sendResetPasswordToken.data.message);
       }
-      toast.success("Check Email for reset link")
+      toast.success("Check Email for reset link");
     } catch (error) {
-      console.log("Error while sending Reset Password Token")
-      toast.error("Error while sending Reset Password Token")
+      console.log("Error while sending Reset Password Token");
+      toast.error("Error while sending Reset Password Token");
     }
-    dispatch(setLoading(false))
-    toast.dismiss(toastId)
+    dispatch(setLoading(false));
+    toast.dismiss(toastId);
   };
 };
 
-export const resetPassword = ({password, confirmPassword, navigate}) =>{
-   return async(dispatch) =>{
+export const resetPassword = ({
+  password,
+  confirmPassword,
+  token,
+  navigate,
+}) => {
+  return async (dispatch) => {
     const toastId = toast.loading("Loading...");
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     try {
-      const resetPassword = await apiConnector("POST", RESETPASSWORD_API, {password, confirmPassword});
-      if(!resetPassword.data.success){
-        throw new Error(resetPassword.data.message);
+      const response = await apiConnector("POST", RESETPASSWORD_API, {
+        password,
+        confirmPassword,
+        token,
+      });
+      if (!resetPassword?.data?.success) {
+        throw new Error(response?.data?.message || "Failed to reset password");
       }
       toast.success("Password Reset Successfully");
       navigate("/login");
     } catch (error) {
-      console.log("Error While Reseting Password ->", error);
-      toast.error("Error While Reseting Password")
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An error occurred. Please try again.";
+      toast.error(errorMessage);
     }
     toast.dismiss(toastId);
     dispatch(setLoading(false));
-
-  }
-}
+  };
+};

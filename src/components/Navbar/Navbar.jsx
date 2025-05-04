@@ -1,12 +1,14 @@
-// import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavbarLinks } from "../../data/navbar-links";
 import Logo from "../../assets/Logo/Logo-Full-Light.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdArrowDropDown } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
-// import { apiConnector } from "../../services/apiconnector";
-// import { categories } from "../../services/apis";
+import { LuLogOut } from "react-icons/lu";
+import { logout } from "../../services/operations/authApi";
+
+
 
 export const Navbar = () => {
   const subLinks = [
@@ -14,26 +16,12 @@ export const Navbar = () => {
     { course: "Web Development", path: "/web development" },
   ];
 
-
-  // const [catLinks, setCatLinks] = useState([]);
-
-  // const fetchAllCategories = async () => {
-  //   try {
-  //     const result = await apiConnector("GET", categories.CATEGORIES_API);
-  //     console.log(result);
-  //     setCatLinks(result.data);
-  //   } catch (error) {
-  //     console.log("Error While fetching data of categories");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchAllCategories();
-  // }, []);
-
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  console.log(user)
 
   return (
     <div className="relative flex justify-between items-center px-[10rem] bg-richblack-800 py-6 text-richblack-50">
@@ -83,22 +71,26 @@ export const Navbar = () => {
             </div>
           </div>
         ) : (
-          <div>
-            {/* <div>
+          <div className="flex items-center gap-3">
+            <div className="w-[2rem] h-[2rem] group relative">
+              <Link to="/profile">
+                <img src={user.image} alt="" className=" rounded-full"/>
+              </Link>
+              <div className="absolute top-10 opacity-0 z-10 flex gap-2 p-2 flex-col group-hover:opacity-100 bg-richblack-50 text-richblack-800 rounded-xl">
+                <Link to="/dashboard">Dashboard</Link>
+                <button onClick={()=>dispatch(logout(navigate))} className="flex gap-1 items-center">Logout <LuLogOut /></button>
+              </div>
+            </div>
+            <div>
               {user.accountType !== "Instructor" && "Admin" ? (
-                <div>
-                  <FaCartShopping />
-                  {totalItems}
+                <div className="flex items-start gap-1 group text-yellow-100">
+                  <FaCartShopping size="2em"/>
+                  <div className="group-hover:animate-bounce">{totalItems}</div>
                 </div>
               ) : (
                 <div></div>
               )}
             </div>
-            <div>
-              <Link to="/profile">
-                <img src={user.image} alt="" />
-              </Link>
-            </div> */}
           </div>
         )}
       </div>

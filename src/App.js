@@ -5,6 +5,9 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Toaster } from "react-hot-toast";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { OtpVerification } from "./pages/OtpVerification";
+import { UpdatePassword } from "./pages/UpdatePassword";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
       <Route path="/" element={<Home/>}></Route>
       <Route path="/signUp" element={<SignUp/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
+      <Route path="/forgotPassword" element={<ForgotPassword/>}></Route>
+      <Route path="/verify-email" element={<OtpVerification/>}></Route>
+      <Route path="/update-password/:token" element={<UpdatePassword/>}></Route>
      </Routes>
      <Toaster position="top-center" reverseOrder={false} />
     </div>
