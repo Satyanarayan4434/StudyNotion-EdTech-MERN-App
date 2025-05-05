@@ -181,16 +181,17 @@ export const resetPassword = ({
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
+    console.log("Token received inside redux thunk ->", token)
     try {
       const response = await apiConnector("POST", RESETPASSWORD_API, {
         password,
         confirmPassword,
         token,
       });
-      if (!resetPassword?.data?.success) {
+      if (!response?.data?.success) {
         throw new Error(response?.data?.message || "Failed to reset password");
       }
-      toast.success("Password Reset Successfully");
+      toast.success(response?.data?.message);
       navigate("/login");
     } catch (error) {
       const errorMessage =

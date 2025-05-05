@@ -14,7 +14,7 @@ const dispatch = useDispatch();
 const navigate = useNavigate();
 const [watchPassword, setWatchPassword] = useState(false)
 const { token } = useParams();
-console.log(token)
+console.log("Token Passed from frontend ->",token)
 const {password, confirmPassword} = data
 
 
@@ -24,12 +24,7 @@ const handleChange = (event) =>{
     setData((prevData)=>({
         ...prevData, [name]:value
     }));
-    if (name === 'confirmPassword' || name === 'password') {
-        setWatchPassword(true);
-   }
-   else{
-    setWatchPassword(false)
-   }
+    
 }
 
 if(!token){
@@ -49,7 +44,7 @@ const handleSubmit = (event) =>{
         toast.error("Passwords do not match.");
         return;
     }
-    dispatch(resetPassword({password, confirmPassword, navigate}))
+    dispatch(resetPassword({password, confirmPassword, token, navigate}))
 }
 
 

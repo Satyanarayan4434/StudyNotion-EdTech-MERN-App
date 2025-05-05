@@ -21,7 +21,6 @@ export const Navbar = () => {
   const { totalItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(user)
 
   return (
     <div className="relative flex justify-between items-center px-[10rem] bg-richblack-800 py-6 text-richblack-50">

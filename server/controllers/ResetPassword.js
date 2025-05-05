@@ -15,6 +15,7 @@ exports.resetPasswordToken = async (req, res) => {
       });
     }
     const token = crypto.randomBytes(20).toString("hex");
+    console.log(`Token Generated in Reset Password Token Controller ${token}`)
 
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
@@ -51,7 +52,7 @@ exports.resetPasswordToken = async (req, res) => {
 exports.resetPassword = async (req, res) => {
   try {
     const { password, confirmPassword, token } = req.body;
-
+    console.log("Reset Password Request Received. Token:", token); 
     if (confirmPassword !== password) {
       return res.json({
         success: false,
@@ -59,13 +60,30 @@ exports.resetPassword = async (req, res) => {
       });
     }
     const userDetails = await User.findOne({ token: token });
+    console.log("User details not found for token:", token);
     if (!userDetails) {
       return res.json({
         success: false,
         message: "Token is Invalid",
       });
     }
-    if (!(userDetails.resetPasswordExpires > Date.now())) {
+
+
+    // --- DETAILED LOGGING BEFORE EXPIRY CHECK ---
+    const currentTime = Date.now();
+    const expiryTime = userDetails.resetPasswordExpires; // Get expiry time from DB data
+    const isExpired = !(expiryTime > currentTime);
+
+    console.log("Current Server Time (ms):", currentTime); // Log current time (timestamp)
+    console.log("Token Expiry Time (from DB - ms):", expiryTime); // Log expiry time from DB (should be timestamp or Date object)
+    console.log(`Expiry Check: !( ${expiryTime} > ${currentTime} )`);
+    console.log("Is Token Considered Expired?", isExpired); // Log the result of the check
+    // --- END DETAILED LOGGING ---
+
+
+
+
+    if (isExpired) {
       return res.status(403).json({
         success: false,
         message: `Token is Expired, Please Regenerate Your Token`,
@@ -74,7 +92,10 @@ exports.resetPassword = async (req, res) => {
     const encryptedPassword = await bcrypt.hash(password, 10);
     await User.findOneAndUpdate(
       { token: token },
-      { password: encryptedPassword },
+      { password: encryptedPassword,
+        token: undefined,
+        resetPasswordExpires: undefined
+       },
       { new: true }
     );
     res.json({
