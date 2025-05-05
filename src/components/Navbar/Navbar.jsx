@@ -24,9 +24,9 @@ export const Navbar = () => {
 
   return (
     <div className="relative flex justify-between items-center px-[10rem] bg-richblack-800 py-6 text-richblack-50">
-      <div>
+      <Link to="/">
         <img src={Logo} alt="" />
-      </div>
+      </Link>
       <div className="flex gap-3 items-center">
         {NavbarLinks.map((link, index) => {
           return link.title === "Catalog" ? (

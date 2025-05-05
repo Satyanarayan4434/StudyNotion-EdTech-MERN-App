@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSignUpData } from "../slices/slice/authSlice";
 import { sendOtp } from "../services/operations/authApi";
+import toast from "react-hot-toast";
 
 
 export default function SignUp() {
@@ -76,7 +77,7 @@ export default function SignUp() {
 
     //Password Matching
     if (data.password !== data.confirmPassword) {
-      alert("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 

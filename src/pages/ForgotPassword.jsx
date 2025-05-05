@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { sendResetPasswordToken } from "../services/operations/authApi";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa6";
 
 export const ForgotPassword = () => {
   const [isUrlSend, setisUrlSend] = useState(false);
@@ -45,7 +46,7 @@ export const ForgotPassword = () => {
           >
             Resend Email
           </button>
-          <Link to="/login">Back to login</Link>
+          <Link to="/login" className="flex items-center gap-2"><FaArrowLeft />Back to login</Link>
         </div>
       ) : (
         <div className="flex items-start gap-3 flex-col text-richblack-50 w-[23rem]">
@@ -77,7 +78,7 @@ export const ForgotPassword = () => {
               Reset Password
             </button>
           </form>
-          <Link to="/login">Back to login</Link>
+          <Link to="/login"  className="flex items-center gap-2"><FaArrowLeft />Back to login</Link>
         </div>
       )}
     </div>
