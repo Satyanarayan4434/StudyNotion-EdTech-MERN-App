@@ -5,6 +5,8 @@ import BannerImage3 from "../assets/Images/aboutus3.webp";
 import HighLightedText from "../components/HighlightedText";
 import FoundingStory from "../assets/Images/FoundingStory.png";
 import Button from "../components/Button";
+import { ContactPage } from "../components/ContactPage/ContactPage";
+import Reviews from "../components/Reviews/Reviews";
 
 export const AboutUs = () => {
   return (
@@ -164,6 +166,8 @@ export const AboutUs = () => {
           </div>
         </div>
       </div>
+      <ContactPage/>
+      <Reviews/>
     </div>
   );
 };
