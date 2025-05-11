@@ -10,6 +10,7 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { OtpVerification } from "./pages/OtpVerification";
 import { UpdatePassword } from "./pages/UpdatePassword";
 import { AboutUs } from "./pages/AboutUs";
+import { Dashboard } from "./pages/Dashboard";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Route path="/verify-email" element={<OtpVerification/>}></Route>
       <Route path="/update-password/:token" element={<UpdatePassword/>}></Route>
       <Route path="/about" element={<AboutUs/>}></Route>
+      <Route path="/dashboard" element={<Dashboard/>}></Route>
      </Routes>
      <Footer/>
      <Toaster position="top-center" reverseOrder={false} />
