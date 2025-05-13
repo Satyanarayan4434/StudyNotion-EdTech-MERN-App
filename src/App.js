@@ -36,9 +36,9 @@ function App() {
         <Route path="/about" element={<AboutUs />}></Route>
 
         {/* Dashboard Specific Routes */}
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route  element={<Dashboard />}>
         {/* Default Route */}
-        <Route index element={<Navigate to="my-profile" replace />} />
+        <Route index element={<Navigate to="/dashboard/my-profile" replace />} />
 
           {/* Children Routes */}
           <Route path="/dashboard/my-profile" element={<MyProfile />}/>

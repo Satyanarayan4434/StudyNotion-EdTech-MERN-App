@@ -72,9 +72,9 @@ export const Navbar = () => {
         ) : (
           <div className="flex items-center gap-3">
             <div className="w-[2rem] h-[2rem] group relative">
-              <Link to="/profile">
+              <div >
                 <img src={user.image} alt="" className=" rounded-full"/>
-              </Link>
+              </div>
               <div className="absolute top-10 opacity-0 z-10 flex gap-2 p-2 flex-col group-hover:opacity-100 bg-richblack-50 text-richblack-800 rounded-xl">
                 <Link to="/dashboard">Dashboard</Link>
                 <button onClick={()=>dispatch(logout(navigate))} className="flex gap-1 items-center">Logout <LuLogOut /></button>
