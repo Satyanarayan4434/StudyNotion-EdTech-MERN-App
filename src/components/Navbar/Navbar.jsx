@@ -76,7 +76,7 @@ export const Navbar = () => {
                 <img src={user.image} alt="" className=" rounded-full"/>
               </div>
               <div className="absolute top-10 opacity-0 z-10 flex gap-2 p-2 flex-col group-hover:opacity-100 bg-richblack-50 text-richblack-800 rounded-xl">
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/dashboard/my-profile">Dashboard</Link>
                 <button onClick={()=>dispatch(logout(navigate))} className="flex gap-1 items-center">Logout <LuLogOut /></button>
               </div>
             </div>
