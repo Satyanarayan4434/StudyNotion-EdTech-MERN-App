@@ -17,7 +17,7 @@ import { AddCourse } from "./components/Dashboard/AddCourse";
 import { EnrolledCourses } from "./components/Dashboard/EnrolledCourses";
 import { MyCourses } from "./components/Dashboard/MyCourses";
 import { PurchaseHistory } from "./components/Dashboard/PurchaseHistory";
-import { Settings } from "./components/Dashboard/Settings";
+import { Settings } from "./components/Dashboard/Settings/Settings";
 
 function App() {
   return (

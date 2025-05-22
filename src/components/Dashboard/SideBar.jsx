@@ -41,7 +41,7 @@ export const SideBar = () => {
   };
 
   return (
-    <div className="bg-richblack-800 min-h-screen border-t-[1px] border-richblack-50 flex flex-col gap-6 ">
+    <div className="min-h-screen border-t-[1px] border-richblack-50 flex flex-col gap-6 ">
       <div className="">
         {filterdUser.map((data) => {
           return (

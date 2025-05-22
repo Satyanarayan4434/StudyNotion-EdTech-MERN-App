@@ -5,7 +5,6 @@ import { FaRegEdit } from "react-icons/fa";
 
 export const MyProfile = () => {
   const { user } = useSelector((state) => state.profile);
-  console.log("Inside Fronted->", user);
   return (
     <div className="flex flex-col gap-10 px-10 py-10 bg-richblack-900 text-richblack-50 h-screen border-t-[1px] border-richblack-50 border-l-[1px]">
       <div className="font-bold text-4xl">My Profile</div>

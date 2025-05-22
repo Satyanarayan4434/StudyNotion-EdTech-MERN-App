@@ -7,7 +7,7 @@ export const Dashboard = () => {
   return (
     <div className='w-full h-full flex relative'>
         
-        <div className='w-[20%] '>
+        <div className='w-[20%] bg-richblack-800 '>
             <SideBar/>
         </div>
         <div className='w-[100%]'>
