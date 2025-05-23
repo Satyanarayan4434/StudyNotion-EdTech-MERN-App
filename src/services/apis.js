@@ -4,10 +4,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 //                             Auth API's                            */
 //****************************************************************** */
 export const authEndpoints ={
-    SENDOTP_API: BASE_URL + "/auth/sendotp",
-    SIGNUP_API: BASE_URL +"/auth/signup",
+    SENDOTP_API: BASE_URL + "/auth/sendOtp",
+    signUp_API: BASE_URL +"/auth/signUp",
     LOGIN_API: BASE_URL +"/auth/login",
-    CHANGEPASSWORD_API: BASE_URL +"/auth/changepassword",
+    CHANGEPASSWORD_API: BASE_URL +"/auth/changePassword",
 }
 
 //****************************************************************** */

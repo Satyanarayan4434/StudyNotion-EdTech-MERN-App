@@ -12,7 +12,7 @@ export const OtpVerification = () => {
   const [otp, setOtp] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(otp)
+  
 
   const {
     firstName,
@@ -40,9 +40,9 @@ export const OtpVerification = () => {
         navigate,
       })
     );
-    setOtp();
+    setOtp(otp);
   };
-
+console.log(otp);
   return (
     <div className="bg-richblack-900 text-richblack-50 flex flex-col items-center justify-center h-screen ">
       <div className="w-[23rem] flex flex-col gap-2  -mt-40">

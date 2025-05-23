@@ -20,7 +20,7 @@ export const MyProfile = () => {
             />
             <div className="flex flex-col items-start justify-between">
               <div className="text-lg text-richblack-25 font-semibold">
-                {user?.firstName} {user.lastName}
+                {user?.firstName} {user?.lastName}
               </div>
               <div className="text-richblack-300 ">{user?.email}</div>
             </div>

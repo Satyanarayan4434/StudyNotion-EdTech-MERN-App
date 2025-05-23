@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { setLoading, setToken } from "../../slices/slice/authSlice";
 import { setProfile } from "../../slices/slice/profileSlice";
 
-const { SENDOTP_API, SIGNUP_API, LOGIN_API, CHANGEPASSWORD_API } =
+const { SENDOTP_API, signUp_API, LOGIN_API, CHANGEPASSWORD_API } =
   authEndpoints;
 const { RESETPASSWORDTOKEN_API, RESETPASSWORD_API } = resetPasswordEndpoints;
 
@@ -15,9 +15,9 @@ export const sendOtp = ({ email, navigate }) => {
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SENDOTP_API, { email });
-      console.log(response?.data?.success);
+      console.log("Inside SEND OTP API",response?.data?.success);
 
-      if (!sendOtp.data.success) {
+      if (!response.data.success) {
         throw new Error(response?.data?.message);
       }
 
@@ -47,7 +47,7 @@ export const signUp = ({
     const toastId = toast.loading("Loading..");
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("POST", SIGNUP_API, {
+      const response = await apiConnector("POST", signUp_API, {
         firstName,
         lastName,
         email,
@@ -58,10 +58,10 @@ export const signUp = ({
         otp,
       });
 
-      if (!response.data.success) {
+      if (!response?.data?.success) {
         throw new Error(response?.data?.message);
       }
-      toast.success(response?.data?.message);
+      toast.success(response?.data?.message || "OTP sent successfully!");
       navigate("/login");
     } catch (error) {
       console.log(error?.response?.data?.message);
@@ -82,8 +82,8 @@ export const login = ({ email, password, navigate }) => {
         password,
       });
 
-      if (!response.data.success) {
-        throw new Error(response.data.message);
+      if (!response?.data?.success) {
+        throw new Error(response?.data?.message);
       }
       toast.success(response?.data?.message);
       dispatch(setToken(response.data.token));

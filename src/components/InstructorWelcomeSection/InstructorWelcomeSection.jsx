@@ -21,7 +21,7 @@ export default function InstructorWelcomeSection() {
           </div>
         </div>
         <div className="flex">
-            <Button ToLink="/signUp" active={true}>Start Teaching Today<FaArrowRight/></Button>
+            <Button ToLink="/signup" active={true}>Start Teaching Today<FaArrowRight/></Button>
         </div>
       </div>
     </div>

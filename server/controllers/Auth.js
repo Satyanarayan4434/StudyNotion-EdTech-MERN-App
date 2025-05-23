@@ -8,9 +8,9 @@ const { passwordUpdated } = require("../mail/templates/passwordUpdate");
 const Profile = require("../model/Profile");
 require("dotenv").config();
 
-// Signup Controller for Registering USers
+// signUp Controller for Registering USers
 
-exports.signup = async (req, res) => {
+exports.signUp = async (req, res) => {
   try {
     // Destructure fields from the request body
     const {
@@ -137,7 +137,7 @@ exports.login = async (req, res) => {
       // Return 401 Unauthorized status code with error message
       return res.status(401).json({
         success: false,
-        message: `User is not Registered with Us Please SignUp to Continue`,
+        message: `User is not Registered with Us Please signUp to Continue`,
       });
     }
 
@@ -182,18 +182,12 @@ exports.login = async (req, res) => {
 };
 
 // Send OTP For Email Verification
-exports.sendotp = async (req, res) => {
+exports.sendOtp = async (req, res) => {
   try {
     const { email } = req.body;
-
-    // Check if user is already present
-    // Find user with provided email
     const checkUserPresent = await User.findOne({ email });
-    // to be used in case of signup
 
-    // If user found with provided email
     if (checkUserPresent) {
-      // Return 401 Unauthorized status code with error message
       return res.status(401).json({
         success: false,
         message: `User is Already Registered`,

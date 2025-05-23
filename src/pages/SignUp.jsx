@@ -6,7 +6,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setSignUpData } from "../slices/slice/authSlice";
+import { setsignUpData } from "../slices/slice/authSlice";
 import { sendOtp } from "../services/operations/authApi";
 import toast from "react-hot-toast";
 
@@ -89,7 +89,7 @@ export default function SignUp() {
     setSubmitedData(finalData);
 
     //Dispatch Data to Redux
-    dispatch(setSignUpData(data));
+    dispatch(setsignUpData(data));
     const {email} = data;
     console.log(email)
     dispatch(sendOtp({email, navigate}));
