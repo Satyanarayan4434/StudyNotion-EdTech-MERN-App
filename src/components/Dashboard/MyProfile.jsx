@@ -36,7 +36,7 @@ export const MyProfile = () => {
             <div className="text-lg text-richblack-25 font-semibold">Additional Details</div>
             <Link to="/dashboard/settings" className="bg-yellow-100 text-richblack-800 px-4 rounded-md py-1 flex items-center gap-1"><FaRegEdit />Edit</Link>
           </div>
-          <div className="text-richblack-300 ">{user?.additionalDetails?.about !== null?user.additionalDetails.about:"Add Your Bio"}</div>
+          <div className="text-richblack-300 ">{user?.additionalDetails?.about ? user.additionalDetails.about : "Add Your Bio"}</div>
         </div>
 
         {/* 3rd Card */}
@@ -62,7 +62,7 @@ export const MyProfile = () => {
             </div>
             <div>
               <div className="text-lg text-richblack-25 font-semibold">Contact Number</div>
-              <div className="text-richblack-300 ">{user?.additionalDetails?.contactNumber !== null?user?.additionalDetails?.contactNumber:"Add Phone Number"}</div>
+              <div className="text-richblack-300 "> {user?.additionalDetails?.contactNumber ? user.additionalDetails.contactNumber : "Add Phone Number"}</div>
             </div>
           </div>
         </div>

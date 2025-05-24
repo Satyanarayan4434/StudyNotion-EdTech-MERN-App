@@ -10,13 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const PasswordChange = () => {
  
-    const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showOldPassword, setShowOldPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {token} = useSelector((state)=>state.auth);
-
+  console.log(token)
   const {
     register,
     handleSubmit,
@@ -54,7 +54,7 @@ export const PasswordChange = () => {
               onClick={() => setShowOldPassword(!showOldPassword)}
               className="absolute bottom-6 right-6"
             >
-              {showPassword ? (
+              {showOldPassword ? (
                 <div>
                   <FaEye />
                 </div>

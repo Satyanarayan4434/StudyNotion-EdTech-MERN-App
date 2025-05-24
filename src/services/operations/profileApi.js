@@ -57,7 +57,7 @@ export const passwordChange = ({
       }
 
       toast.success(response?.data?.message);
-      navigate("/my-profile");
+      navigate("/dashboard/my-profile");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
