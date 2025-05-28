@@ -81,7 +81,7 @@ export const login = ({ email, password, navigate }) => {
         email,
         password,
       });
-
+      console.log("Response from authAPI login->",response);
       if (!response?.data?.success) {
         throw new Error(response?.data?.message);
       }
@@ -94,14 +94,14 @@ export const login = ({ email, password, navigate }) => {
 
       const userPayload = { ...response.data.user, image: userImage };
       dispatch(setProfile(userPayload));
-
+      
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("user", JSON.stringify(userPayload));
 
       navigate("/");
     } catch (error) {
       console.log(error?.response?.data?.message);
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Error while Login");
     }
     dispatch(setLoading(false));
     toast.dismiss(toastID);

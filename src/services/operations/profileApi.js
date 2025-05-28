@@ -4,8 +4,9 @@ import { authEndpoints } from "../apis";
 import toast from "react-hot-toast";
 import { setLoading } from "../../slices/slice/profileSlice";
 import { logout } from "../operations/authApi";
+import { setProfile } from "../../slices/slice/profileSlice";
 
-const { DELETEACCOUNT_API } = profileEndPoints;
+const {UPDATEPROFILE_API, DELETEACCOUNT_API } = profileEndPoints;
 const { CHANGEPASSWORD_API } = authEndpoints;
 
 // export const changeProfilePicture = ({newImageFile, userId, token}) =>{
@@ -28,9 +29,31 @@ const { CHANGEPASSWORD_API } = authEndpoints;
 //     }
 // }
 
-// export const updateProfile = () =>{
+export const updateProfile = ({firstName, lastName, dateOfBirth, gender, contactNumber, about, token, navigate }) =>{
+  return async (dispatch) =>{
+    const toastID = toast.loading("Loading...");
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("PUT", UPDATEPROFILE_API,{firstName, lastName, dateOfBirth, gender, contactNumber, about }, {
+          Authorization: `Bearer ${token}`,
+        });
+        if(!response?.data?.success){
+          throw new Error(response?.data?.message)
+        }
+        console.log("Printing Response->",response)
+        toast.success(response?.data?.message || "Profile Updated Successfully!");
+        dispatch(setProfile(response?.data?.data));
+        localStorage.setItem("user", JSON.stringify(response.data.data));
+        navigate("/dashboard/my-profile")
+    } catch (error) {
+      toast.error(error?.response?.message);
+      console.log("Error while updating Profile info", error)
+    }
+    toast.dismiss(toastID);
+    dispatch(setLoading(false));
+  }
+}
 
-// }
 
 export const passwordChange = ({
   oldPassword,
