@@ -18,6 +18,7 @@ import { EnrolledCourses } from "./components/Dashboard/EnrolledCourses";
 import { MyCourses } from "./components/Dashboard/MyCourses";
 import { PurchaseHistory } from "./components/Dashboard/PurchaseHistory";
 import { Settings } from "./components/Dashboard/Settings/Settings";
+import { Cart } from "./components/Cart/Cart";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses />}/>
           <Route path="/dashboard/purchase-history" element={<PurchaseHistory />}/>
           <Route path="/dashboard/settings" element={<Settings />} />
+          <Route path="/dashboard/cart" element={<Cart />} />
         </Route>
       </Routes>
       <Footer />

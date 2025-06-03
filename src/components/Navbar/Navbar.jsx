@@ -19,6 +19,7 @@ export const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -82,7 +83,7 @@ export const Navbar = () => {
             </div>
             <div>
               {user.accountType !== "Instructor" && "Admin" ? (
-                <div className="flex items-start gap-1 group text-yellow-100">
+                <div onClick={()=>navigate("/dashboard/cart")} className="cursor-pointer flex items-start gap-1 group text-yellow-100">
                   <FaCartShopping size="2em"/>
                   <div className="group-hover:animate-bounce">{totalItems}</div>
                 </div>
